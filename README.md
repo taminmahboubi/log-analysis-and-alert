@@ -94,18 +94,18 @@ grep is also fast and built-in feature, which makes it a good choice for scannin
 **Create a timestam to include in the alert**
 `TIMESTAMP=$(date "+%Y-%m-%d %T")`
 
--`$(...)` captures the output of date and assigns it to TIMESTAMP
--`date` command generates the current date and time
--`"+%Y-%m-%d %T"` specifies a custom format
+- `$(...)` captures the output of date and assigns it to TIMESTAMP
+- `date` command generates the current date and time
+- `"+%Y-%m-%d %T"` specifies a custom format
 
 **Format an alert message with the timestamp, name of log file and errors found**
 `MESSAGE="[Alert $TIMESTAMP] Errors detected in $LOG_FILE:\n\n$ERRORS"`
 (constructs a detailed message alert)
 
--`MESSAGE=""` its all text, hence the "" quotation marks
--`[Alert $TIMESTAMP]` a label indicating this is an alert with the timestamp
--`\n\n` inserts two new lines
--`Errors detected in $LOG_FILE` shows which file the errors came from
+- `MESSAGE=""` its all text, hence the "" quotation marks
+- `[Alert $TIMESTAMP]` a label indicating this is an alert with the timestamp
+- `\n\n` inserts two new lines
+- `Errors detected in $LOG_FILE` shows which file the errors came from
 
 
  
@@ -114,15 +114,15 @@ grep is also fast and built-in feature, which makes it a good choice for scannin
 First we need a variable to store EMAIL:
 `EMAIL="$USER@$(hostname)"`
 
--`$USER` is a predifined variable in linux that stores the username of the user currently logged-in.
--`$(hostname)` is a command that retrieves the system's hostname.
--together we get an email address that works for local mail delivery, meaning messages sent to it will be delivered to the local system's inbox (/var/mail/$USER)
+- `$USER` is a predifined variable in linux that stores the username of the user currently logged-in.
+- `$(hostname)` is a command that retrieves the system's hostname.
+- together we get an email address that works for local mail delivery, meaning messages sent to it will be delivered to the local system's inbox (/var/mail/$USER)
 
 
 `echo -e "$MESSAGE" | mail -s "System Alert: Log Errors Found" "$EMAIL"`
--`echo` prints text to terminal or passes it to another command
--`-e` will enable the interpretation of **escape sequences** like `\n` for new lines, as we know **$MESSAGE** contains them.
--`|`(Pipe) redirects the output of `echo` into the `mail` command
--`mail` sends an email
--`-s "System Alert: Log Errors Found"` sets the email's **subject** to "System Alert: Log..."
--`"$EMAIL"` the recepients email
+- `echo` prints text to terminal or passes it to another command
+- `-e` will enable the interpretation of **escape sequences** like `\n` for new lines, as we know **$MESSAGE** contains them.
+- `|`(Pipe) redirects the output of `echo` into the `mail` command
+- `mail` sends an email
+- `-s "System Alert: Log Errors Found"` sets the email's **subject** to "System Alert: Log..."
+- `"$EMAIL"` the recepients email
